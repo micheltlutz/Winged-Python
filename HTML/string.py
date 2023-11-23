@@ -1,16 +1,15 @@
 from core.generic_element import GenericElement
 
+
 class String(GenericElement):
-    _tag = ""
-    _container = False
-    _form_element = False
     text = ""
 
     def __init__(self, str):
+        super().__init__()
         self.text = str
 
-    def getString(self):
+    def get_string(self):
         return self.text
 
     def generate(self):
-        print(self.getString())
+        print(self.get_string())

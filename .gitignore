@@ -244,4 +244,8 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+# pytest cache
+.cache/
+
+
 # End of https://www.toptal.com/developers/gitignore/api/python,windows,macos,venv

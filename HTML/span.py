@@ -1,8 +1,9 @@
-from core.generic_element import GenericElement
+from core.tag import Tag
+
 
 # Span tag element class
 
-class Span(GenericElement):
+class Span(Tag):
     _tag = "span"
     _container = True
     _form_element = False

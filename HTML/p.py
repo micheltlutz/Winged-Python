@@ -1,8 +1,9 @@
-from core.generic_element import GenericElement
+from core.tag import Tag
+
 
 # P tag element class
 
-class P(GenericElement):
+class P(Tag):
     _tag = "p"
     _container = True
     _form_element = False

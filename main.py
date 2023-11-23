@@ -9,15 +9,15 @@ from HTML.div import Div
 mainDiv = Div(("id","mainDiv"))
 paragraph = P(("id","paragraph"))
 span_test = Span(("id","teste"))
-span_test.addAttributes(("class","teste2"),("style","color:red"))
-span_test.addElement(String("Teste"))
+span_test.add_attributes(("class", "teste2"), ("style", "color:red"))
+span_test.add(String("Teste"))
 
-paragraph.addElement(span_test)
+paragraph.add(span_test)
 # print(span_test.getString())
 
 # span_test.generate()
 
-mainDiv.addElement(paragraph)
+mainDiv.add(paragraph)
 
 
 mainDiv.generate()

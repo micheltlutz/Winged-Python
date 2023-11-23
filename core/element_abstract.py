@@ -3,9 +3,9 @@ from abc import abstractmethod
 
 class ElementAbstract:
     @abstractmethod
-    def getString(self):
+    def get_string(self):
         pass
-    
+
     @abstractmethod
     def generate(self):
         pass
