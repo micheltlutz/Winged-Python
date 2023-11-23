@@ -1,7 +1,7 @@
 import unittest
 import io
 import sys
-from core.attribute import Attribute
+from winged.core.attribute import Attribute
 
 
 class TestAttribute(unittest.TestCase):

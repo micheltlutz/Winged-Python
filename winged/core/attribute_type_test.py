@@ -1,7 +1,6 @@
 # Tests for attribute_type.py
 import unittest
-from typing import Tuple, Optional
-from core.attribute_type import AttributeType
+from winged.core.attribute_type import AttributeType
 
 
 # # AttributeType é definido como um alias para um tipo de tupla, e não como uma classe ou uma função que pode ser

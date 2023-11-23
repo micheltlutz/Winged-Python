@@ -1,8 +1,8 @@
 import unittest
 import io
 import sys
-from core.generic_element import GenericElement
-from core.element_abstract import ElementAbstract
+from winged.core.generic_element import GenericElement
+from winged.core.element_abstract import ElementAbstract
 
 
 class MockElement(ElementAbstract):

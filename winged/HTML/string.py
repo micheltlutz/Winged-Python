@@ -1,4 +1,4 @@
-from core.generic_element import GenericElement
+from winged.core.generic_element import GenericElement
 
 
 class String(GenericElement):

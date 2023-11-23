@@ -1,5 +1,5 @@
 # from attribute_type import AttributeType
-from core.attribute_type import AttributeType
+from winged.core.attribute_type import AttributeType
 
 
 class Attribute:

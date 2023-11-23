@@ -1,6 +1,6 @@
-from core.attribute_type import AttributeType
-from core.attribute import Attribute
-from core.element_abstract import ElementAbstract
+from winged.core.attribute_type import AttributeType
+from winged.core.attribute import Attribute
+from winged.core.element_abstract import ElementAbstract
 
 
 class Tag(ElementAbstract):

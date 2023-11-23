@@ -1,10 +1,10 @@
 import unittest
 from abc import ABC
 
-from HTML.div import Div
+from winged.HTML.div import Div
 import io
 import sys
-from core.element_abstract import ElementAbstract
+from winged.core.element_abstract import ElementAbstract
 
 
 class MockElement(ElementAbstract, ABC):

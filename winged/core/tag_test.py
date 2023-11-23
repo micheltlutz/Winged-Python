@@ -1,8 +1,5 @@
 import unittest
-from core.tag import Tag
-from core.attribute_type import AttributeType
-import io
-import sys
+from winged.core.tag import Tag
 
 
 class TagTest(unittest.TestCase):

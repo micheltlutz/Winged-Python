@@ -1,4 +1,4 @@
-from core.tag import Tag
+from winged.core.tag import Tag
 
 
 # Div tag element class

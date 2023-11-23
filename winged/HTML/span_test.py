@@ -3,8 +3,8 @@ import io
 import sys
 from abc import ABC
 
-from HTML.span import Span
-from core.element_abstract import ElementAbstract
+from winged.HTML.span import Span
+from winged.core.element_abstract import ElementAbstract
 
 
 class MockElement(ElementAbstract, ABC):
