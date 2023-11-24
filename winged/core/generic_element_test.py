@@ -1,11 +1,13 @@
 import unittest
 import io
 import sys
+from abc import ABC
+
 from winged.core.generic_element import GenericElement
 from winged.core.element_abstract import ElementAbstract
 
 
-class MockElement(ElementAbstract):
+class MockElement(ElementAbstract, ABC):
     def get_string(self):
         return "mock_element"
 

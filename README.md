@@ -51,3 +51,7 @@ python3 -m pip install -r requirements.txt
 ```bash
 python -m unittest discover -s tests
 ```
+
+## TODO
+
+- [ ] Make documentation with Sphinx
