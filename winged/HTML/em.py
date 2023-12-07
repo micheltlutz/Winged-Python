@@ -8,7 +8,8 @@ elements within an HTML-like document. It inherits attributes and methods from t
 handling 'em' elements, which are used to emphasize text by rendering it in italic or with other styling, 
 depending on CSS.
 
-Usage Example:
+# Usage Example:
+
 ```python
 from winged.core.tag import Tag
 

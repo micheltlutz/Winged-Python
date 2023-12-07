@@ -5,7 +5,8 @@ This module defines a class called 'Head' that represents a 'head' HTML-like con
 
 The 'Head' class is a specific implementation of the 'Tag' class and is used to create and manipulate 'head' container elements within an HTML-like document. It inherits attributes and methods from the 'Tag' class and specializes in handling 'head' elements, which typically contain meta-information about the document.
 
-Usage Example:
+# Usage Example:
+
 ```python
 from winged.core.tag import Tag
 

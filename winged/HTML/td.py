@@ -6,15 +6,16 @@ It inherits from the Tag class and provides the necessary methods to generate 't
 
 'dt' tags define a standard cell in an HTML table.
 
-Features:
+# Features:
 - It can act as a container and encapsulate other HTML elements.
 - It is not considered a form element.
 
-Example Usage:
-    ```
-    cell = TD()
-    cell.add(String("Cell Text"))  # Add text or other HTML elements as necessary
-    ```
+## Example Usage:
+
+```python
+cell = TD()
+cell.add(String("Cell Text"))  # Add text or other HTML elements as necessary
+```
 
 This would generate: <td>Cell Text</td>
 

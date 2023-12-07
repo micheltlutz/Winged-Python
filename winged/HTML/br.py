@@ -5,7 +5,8 @@ This module defines a class called 'Br' that represents a 'br' HTML-like element
 
 The 'Br' class is a specific implementation of the 'Tag' class and is used to create and manipulate 'br' line break elements within an HTML-like document. It inherits attributes and methods from the 'Tag' class and specializes in handling 'br' elements, which are used to create line breaks in HTML.
 
-Usage Example:
+# Usage Example:
+
 ```python
 from winged.core.tag import Tag
 

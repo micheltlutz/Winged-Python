@@ -7,7 +7,8 @@ The 'Title' class is a specific implementation of the 'Tag' class and is used to
 container elements within an HTML-like document. It inherits attributes and methods from the 'Tag' class and 
 specializes in handling 'title' elements, which specify the title of the document.
 
-Usage Example:
+# Usage Example:
+
 ```python
 from winged.core.tag import Tag
 

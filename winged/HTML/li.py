@@ -6,15 +6,16 @@ It inherits from the Tag class and provides the necessary methods to generate 'l
 
 'li' tag is used to define a list item, either ordered or unordered.
 
-Features:
+# Features:
 - It is a container element, meaning it can hold other HTML elements.
 - It is not considered a form element.
 
-Example Usage:
-    ```
-    li = LI()   # Create an instance of an LI tag
-    li.add(String("List Item")) # Add other HTML elements or text as needed
-    ```
+## Example Usage:
+
+```python
+li = LI()   # Create an instance of an LI tag
+li.add(String("List Item")) # Add other HTML elements or text as needed
+```
 
 This would generate: <li>List Item</li>
 

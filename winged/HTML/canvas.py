@@ -5,7 +5,8 @@ This module defines a class called 'Canvas' that represents a 'canvas' HTML-like
 
 The 'Canvas' class is a specific implementation of the 'Tag' class and is used to create and manipulate 'canvas' elements within an HTML-like document. It inherits attributes and methods from the 'Tag' class and specializes in handling canvas elements, which are commonly used for drawing graphics in HTML5.
 
-Usage Example:
+# Usage Example:
+
 ```python
 from winged.core.tag import Tag
 

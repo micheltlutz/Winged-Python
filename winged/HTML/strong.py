@@ -6,15 +6,17 @@ It inherits from the Tag class and provides the necessary methods to generate 's
 
 The 'strong' tag is used to specify text with strong importance, and the contained text is typically displayed in bold.
 
-Features:
+# Features:
 - It is a container element and can hold other HTML elements.
 - It is not considered a form element.
 
-Example Usage:
-    ```
-    important_text = Strong()
-    important_text.add(String("This is important text"))  # Adding a string to the strong tag
-    ```
+## Example Usage:
+
+```python
+important_text = Strong()
+important_text.add(String("This is important text"))  # Adding a string to the strong tag
+```
+
 This would generate: <strong>This is important text</strong>
 
 Methods:

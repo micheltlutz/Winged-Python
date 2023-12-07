@@ -5,15 +5,17 @@ Winged-Python library. The Nav class inherits from the Tag base class and custom
 
 The 'nav' tag in HTML5 represents a section of navigation links. 
 
-Features:
+# Features:
 - Can act as a container for other HTML elements.
 - Does not serve as a form element.
 
-Sample usage:
-    ```
-    navigation = Nav()   # Create an instance of Nav
-    navigation.add(Tag()) # Add other HTML elements as needed
-    ```
+## Sample usage:
+
+```python
+navigation = Nav()   # Create an instance of Nav
+navigation.add(Tag()) # Add other HTML elements as needed
+```
+
 This results in the following HTML: <nav><tag></tag></nav>
 
 Methods: 

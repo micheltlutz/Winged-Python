@@ -7,28 +7,29 @@ from winged.HTML.tr import Tr
 from winged.HTML.th import Th
 from winged.HTML.td import Td
 
+"""
+The Table class is a specific implementation of the HTML 'table' tag in the Winged-Python library.
+It provides helper methods to generate table structures.
+
+Table creation involves creating headers (th), rows (tr), and data cells (td).
+
+# Example Usage:
+
+```python
+table = Table()
+table.add_table_headers(["Name", "Age", "Height", "Location"])  # Define headers
+table.add_row()
+table.add_in_row(String("John"))
+table.add_in_row(String("25"))
+table.add_in_row(String("1.80"))
+table.add_in_row(String("New York"))
+```
+
+This would generate a table with mentioned headers and one row of data.
+"""
+
 
 class Table(Tag):
-    """
-    The Table class is a specific implementation of the HTML 'table' tag in the Winged-Python library.
-    It provides helper methods to generate table structures.
-
-    Table creation involves creating headers (th), rows (tr), and data cells (td).
-
-    Example Usage:
-        ```
-        table = Table()
-        table.add_table_headers(["Name", "Age", "Height", "Location"])  # Define headers
-        table.add_row()
-        table.add_in_row(String("John"))
-        table.add_in_row(String("25"))
-        table.add_in_row(String("1.80"))
-        table.add_in_row(String("New York"))
-        ```
-
-    This would generate a table with mentioned headers and one row of data.
-    """
-
     _tag = "table"
     _container = True
     _form_element = False

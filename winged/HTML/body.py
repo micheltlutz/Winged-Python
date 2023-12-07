@@ -5,7 +5,8 @@ This module defines a class called 'Body' that represents a 'body' HTML-like con
 
 The 'Body' class is a specific implementation of the 'Tag' class and is used to create and manipulate 'body' container elements within an HTML-like document. It inherits attributes and methods from the 'Tag' class and specializes in handling 'body' elements, which represent the main content of an HTML document.
 
-Usage Example:
+# Usage Example:
+
 ```python
 from winged.core.tag import Tag
 

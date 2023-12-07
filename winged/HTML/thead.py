@@ -6,15 +6,16 @@ It inherits from the Tag class and provides the necessary methods to generate 't
 
 The 'thead' tag is used to group the header content in an HTML table.
 
-Features:
+# Features:
 - THead is a container and can encapsulate other HTML elements.
 - It is not a form element.
 
-Example Usage:
-    ```
-    thead = THead()    # Create an instance of 'thead' 
-    thead.add(Tag()) # Add rows (tr elements) to the thead tag
-    ```
+## Example Usage:
+
+```python
+thead = THead()    # Create an instance of 'thead' 
+thead.add(Tag()) # Add rows (tr elements) to the thead tag
+```
 
 This would generate: <thead><tag></tag></thead>
 

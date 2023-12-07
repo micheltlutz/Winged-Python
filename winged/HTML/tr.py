@@ -6,14 +6,15 @@ It inherits from the Tag class and provides the necessary methods to generate 't
 
 The 'tr' tag defines a row of cells in a table.
 
-Features:
+# Features:
 - This is a container and can encapsulate other HTML elements.
 - It is not considered a form element.
 
-Example Usage:
-    ```
-    row = Tr()
-    ```
+## Example Usage:
+
+```python
+row = Tr()
+```
 
 This would generate: <tr></tr>
 

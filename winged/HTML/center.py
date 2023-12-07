@@ -5,7 +5,8 @@ This module defines a class called 'Center' that represents a 'center' HTML-like
 
 The 'Center' class is a specific implementation of the 'Tag' class and is used to create and manipulate 'center' container elements within an HTML-like document. It inherits attributes and methods from the 'Tag' class and specializes in handling 'center' elements.
 
-Usage Example:
+# Usage Example:
+
 ```python
 from winged.core.tag import Tag
 

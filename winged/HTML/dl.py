@@ -6,19 +6,21 @@ It inherits from the Tag class and provides the necessary methods for generating
 
 The 'DL' tag is used in description lists (dl), and it is used to name a term to be described in 'dd' tags.
 
-Features:
+# Features:
+
 - This class acts as a container and can contain other HTML elements.
 - It is not a form element.
 
-Example Usage:
-    ```
+## Example Usage:
+
+    ```python
     term = DL()
     term.add(String("Example Term")) # Add term as needed
     ```
 
 This would generate: <DL>Example Term</DL>
 
-Methods:
+## Methods:
 - All methods available in the Tag class can be called by DL instances.
 
 Note:

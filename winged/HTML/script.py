@@ -8,7 +8,8 @@ The 'Script' class is a specific implementation of the 'Tag' class and is used t
 container elements within an HTML-like document. It inherits attributes and methods from the 'Tag' class and 
 specializes in handling 'script' elements, which are used to control and load JavaScript code.
 
-Usage Example:
+# Usage Example:
+
 ```python
 from winged.core.tag import Tag
 

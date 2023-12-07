@@ -6,15 +6,17 @@ It inherits from the Tag class and provides the necessary methods to generate 'u
 
 The 'u' tag represents an unarticulated annotation in the text, typically styled as underlined text.
 
-Features:
+# Features:
 - It is a container element, meaning it can hold other HTML elements.
 - It is not considered a form element.
 
-Example Usage:
-    ```
-    underlined_text = U()
-    underlined_text.add(String('This is underlined text'))  # Adding a string to the U tag
-    ```
+## Example Usage:
+
+```python
+underlined_text = U()
+underlined_text.add(String('This is underlined text'))  # Adding a string to the U tag
+```
+
 This would generate: <u>This is underlined text</u>
 
 Methods:

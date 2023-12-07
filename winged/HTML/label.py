@@ -4,15 +4,16 @@ from winged.core.tag import Tag
 The Label class is a specific implementation of the HTML 'label' tag in the Winged-Python library.
 It inherits from the Tag class and provides the necessary methods to generate 'label' HTML elements.
 
-Features:
+# Features:
 - It is a container element and can hold other HTML elements.
 - It is not considered a form element.
 
-Example Usage:
-    ```
-    label = Label(attributes={'for': 'input_id'}, text='Input Label')
-    label.generate()  # generates the HTML string
-    ```
+## Example Usage:
+
+```python
+label = Label(attributes={'for': 'input_id'}, text='Input Label')
+label.generate()  # generates the HTML string
+```
 
 This would generate: <label for="input_id">Input Label</label>
 

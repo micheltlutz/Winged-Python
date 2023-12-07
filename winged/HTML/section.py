@@ -7,15 +7,17 @@ It inherits from the Tag class and provides the necessary methods to generate 's
 The 'section' tag defines sections in a document, such as chapters, headers, footers, or any other sections of the 
 document.
 
-Features:
+# Features:
 - It is a container element, meaning it can hold other HTML elements.
 - It is not considered a form element.
 
-Example Usage:
-    ```
-    section = Section()
-    section.add(Tag())  # Adding other generic HTML elements to the section
-    ```
+## Example Usage:
+
+```python
+section = Section()
+section.add(Tag())  # Adding other generic HTML elements to the section
+```
+
 This would generate: <section><tag></tag></section>
 
 Methods:

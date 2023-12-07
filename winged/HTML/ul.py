@@ -7,15 +7,16 @@ It inherits from the Tag class and provides necessary methods for generating 'ul
 The 'ul' tag is used for grouping a collection of items which do not have a numerical ordering, often displayed with 
 bullet points.
 
-Features:
+# Features:
 - It can act as a container and encapsulate other HTML elements.
 - It is not considered a form element.
 
-Example Usage:
-    ```
-    ul = Ul()   # Create an instance of UL
-    ul.add(Tag()) # Add other HTML elements as needed
-    ```
+## Example Usage:
+
+```python
+ul = Ul()   # Create an instance of UL
+ul.add(Tag()) # Add other HTML elements as needed
+```
 
 This results in the following HTML: <ul><tag></tag></ul>
 

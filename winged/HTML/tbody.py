@@ -6,15 +6,16 @@ It inherits from the Tag class and provides the necessary methods to generate 't
 
 The 'tbody' tag is used to group the body content in an HTML table.
 
-Features:
+# Features:
 - TBody is a container and can encapsulate other HTML elements.
 - It is not a form element.
 
-Example Usage:
-    ```
-    tbody = TBody()    # Create an instance of 'tbody' 
-    tbody.add(Tag()) # Add rows (tr elements) to the tbody tag
-    ```
+## Example Usage:
+
+```python
+tbody = TBody()    # Create an instance of 'tbody' 
+tbody.add(Tag()) # Add rows (tr elements) to the tbody tag
+```
 
 This would generate: <tbody><tag></tag></tbody>
 

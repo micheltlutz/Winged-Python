@@ -5,7 +5,8 @@ This module defines a class called 'Span' that represents a 'span' HTML-like con
 
 The 'Span' class is a specific implementation of the 'Tag' class and is used to create and manipulate 'span' inline container elements within an HTML-like document. It inherits the attributes and methods from the 'Tag' class and specializes in handling 'span' elements.
 
-Usage Example:
+# Usage Example:
+
 ```python
 from winged.core.tag import Tag
 

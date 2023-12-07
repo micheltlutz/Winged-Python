@@ -6,14 +6,15 @@ It inherits from the Tag class and provides the necessary methods to generate 't
 
 A 'textarea' tag defines a multi-line text input control for a form.
 
-Features:
+# Features:
 - It is a container element and can encapsulate other HTML elements.
 - It is considered a form element.
 
-Example Usage:
-    ```
-    textarea = Textarea(('name', 'message'), ('rows', '4'), ('cols', '50'))
-    ```
+## Example Usage:
+
+```python
+textarea = Textarea(('name', 'message'), ('rows', '4'), ('cols', '50'))
+```
 
 This would generate: <textarea name="message" rows="4" cols="50"></textarea>
 

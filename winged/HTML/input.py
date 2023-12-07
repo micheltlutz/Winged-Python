@@ -7,14 +7,15 @@ It inherits from the Tag class and provides the methods to generate 'input' HTML
 
 The 'input' tag with type 'text' is used to create input fields in a form where the user can enter text.
 
-Features:
+# Features:
 - It is not a container element, thus cannot hold other HTML elements.
 - It is considered a form element.
 
-Example Usage:
-    ```
-    input_field = Input(('type', 'text'), ('name', 'username'), ('id', 'user-input'))
-    ```
+## Example Usage:
+
+```python
+input_field = Input(('type', 'text'), ('name', 'username'), ('id', 'user-input'))
+```
 This would generate: <input type="text" name="username" id="user-input">
 
 Methods:

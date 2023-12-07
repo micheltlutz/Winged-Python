@@ -7,15 +7,17 @@ those of an 'hr' tag in HTML.
 
 An 'hr' tag in HTML is used for creating a thematic break between paragraph-level elements.
 
-Features:
+# Features:
 - The Hr element isn't a container, meaning it cannot hold other HTML elements.
 - The Hr tag is not considered a form element.
 
-Example usage:
-    ```
-    hr = Hr()       # Create an Hr instance
-    hr.generate()   # Generate the HTML content
-    ```
+## Example usage:
+
+```python
+hr = Hr()       # Create an Hr instance
+hr.generate()   # Generate the HTML content
+```
+
 This will generate: <hr />
 
 Methods:

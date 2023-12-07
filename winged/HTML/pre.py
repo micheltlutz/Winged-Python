@@ -7,14 +7,15 @@ It inherits from the Tag base class and overrides the base class properties to m
 The 'pre' tag in HTML represents preformatted text. Text within a 'pre' element is displayed 
 in a fixed-width font (usually Courier), and it preserves both spaces and line breaks.
 
-Features:
+# Features:
 - This element serves as a container, meaning it can contain other HTML elements.
 - It is not a form element.
 
-Example Usage:
-    ```
-    preformatted_text = Pre(text='    Four spaces\n    are preserved.')
-    ```
+## Example Usage:
+
+```python
+preformatted_text = Pre(text='    Four spaces\n    are preserved.')
+```
 This will generate: <pre>    Four spaces\n    are preserved.</pre>
 
 Methods:
