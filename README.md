@@ -12,48 +12,6 @@ This library is created to be fully independent, not requiring integration with 
 ## Usage Example
 
 
-## Contributing
-
-To contribute, it's simple, follow the guidelines below to prepare your development environment
-
-## Create environment
-
-User OS terminal or IDE terminal
-
-### Linux or macOS
-
-```bash
-python3 -m venv venv
-```
-
-```bash
-source venv/bin/activate
-```
-
-### Windows
-
-```bash
-.\venv\Scripts\activate.bat
-```
-
-```bash
-.\venv\Scripts\activate.ps1`
-```
-
-## Install dependencies
-
-```bash
-python3 -m pip install -r requirements.txt
-```
-
-## Run tests
-
-```bash
-pytest
-```
-
-## Basic Usage
-
 ```python
 
 from winged.HTML.div import Div
@@ -115,6 +73,46 @@ print(divC.generate())
     </tbody>
   </table>
 </div>
+```
+
+## Contributing
+
+To contribute, it's simple, follow the guidelines below to prepare your development environment
+
+## Create environment
+
+User OS terminal or IDE terminal
+
+### Linux or macOS
+
+```bash
+python3 -m venv venv
+```
+
+```bash
+source venv/bin/activate
+```
+
+### Windows
+
+```bash
+.\venv\Scripts\activate.bat
+```
+
+```bash
+.\venv\Scripts\activate.ps1`
+```
+
+## Install dependencies
+
+```bash
+python3 -m pip install -r requirements.txt
+```
+
+## Run tests
+
+```bash
+pytest
 ```
 
 
