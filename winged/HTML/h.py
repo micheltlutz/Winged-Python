@@ -12,17 +12,20 @@ Features:
 - The H class is a container and can encapsulate other HTML elements.
 - It is not a form element.
 
-Example Usage:
-    ```
-    h1 = H('1')    # Create an H instance for 'h1'
-    h1.add("Header Text")  # Add header text
+# Example Usage:
 
-    # Similarly for h2 to h5
-    h2 = H('2')    # Create an H instance for 'h2'
-    h2.add(String("Sub Header Text"))    # Add sub header text
+```pyhon
+h1 = H('1')    # Create an H instance for 'h1'
+h1.add("Header Text")  # Add header text
 
-    ...
-    ```
+# Similarly for h2 to h5
+h2 = H('2')    # Create an H instance for 'h2'
+h2.add(String("Sub Header Text"))    # Add sub header text
+...
+
+# Output
+
+```html
 
 This would generate:
 <h1>Header Text</h1>

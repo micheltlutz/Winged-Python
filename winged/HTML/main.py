@@ -8,15 +8,17 @@ The 'main' tag is a container element used for encapsulating the primary content
 content that is unique to the document and excludes content that is repeated across a set of documents such as site 
 navigation links, header or footer information.
 
-Features:
+# Features:
 - The Main element is a container and hence can include other HTML elements.
 - The Main tag is not considered a form element.
 
-Usage example:
-    ```
-    main_content = Main()
-    main_content.add(Tag()) # Adding other generic HTML elements to the main tag
-    ```
+## Usage example:
+
+```python
+main_content = Main()
+main_content.add(Tag()) # Adding other generic HTML elements to the main tag
+```
+
 This would generate: <main><tag></tag></main>
 
 Methods:

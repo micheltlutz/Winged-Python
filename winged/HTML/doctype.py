@@ -5,7 +5,8 @@ This module defines a class called 'Doctype' that represents a '<!DOCTYPE html>'
 
 The 'Doctype' class is a specific implementation of the 'Tag' class and is used to create and manipulate the '<!DOCTYPE html>' declaration, which specifies the document type and version of an HTML document. It inherits attributes and methods from the 'Tag' class and specializes in handling the document type declaration.
 
-Usage Example:
+# Usage Example:
+
 ```python
 from winged.core.tag import Tag
 

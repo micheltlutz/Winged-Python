@@ -6,15 +6,16 @@ It inherits from the Tag class and provides the necessary methods to generate 't
 
 The 'th' tag defines a header cell in a table.
 
-Features:
+# Features:
 - It is a container element and can contain other HTML elements.
 - It is not considered a form element.
 
-Example Usage:
-    ```
-    table_header = TH()
-    table_header.add(String("Column Header"))   # Add header text as needed
-    ```
+## Example Usage:
+
+```python
+table_header = TH()
+table_header.add(String("Column Header"))   # Add header text as needed
+```
 
 This would generate: <th>Column Header</th>
 

@@ -5,16 +5,17 @@ The Header class in Winged-Python is a representation of the HTML 'header' tag.
 It is a derivation of the Tag class with additional specifications
 to match the behavior and attributes of the HTML 'header' tag.
 
-Features:
+# Features:
 - Header is a container element, meaning it can envelop other HTML elements.
 - Header is not a form element.
 
-Example Usage:
-    ```
-    header = Header()        # Create a Header instance
-    header.add(Tag())        # Add elements to the Header container
-    header.generate()        # Generate the HTML output
-    ```
+## Example Usage:
+
+```python
+header = Header()        # Create a Header instance
+header.add(Tag())        # Add elements to the Header container
+header.generate()        # Generate the HTML output
+```
 This will output: <header><tag></tag></header>
 
 Available methods:

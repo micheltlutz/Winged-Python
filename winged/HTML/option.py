@@ -7,15 +7,16 @@ with the HTML 'option' tag semantics.
 
 The 'option' HTML tag defines an option in a select list.
 
-Features:
+# Features:
 - The Option class is a container that can encapsulate other HTML elements.
 - It is considered a form element.
 
-Example Usage:
-    ```
-    option = Option(('value', 'option_value'))
-    option.add(String('Option Text'))
-    ```
+## Example Usage:
+
+```python
+option = Option(('value', 'option_value'))
+option.add(String('Option Text'))
+```
 
 This generates the following HTML: <option value="option_value">Option Text</option>
 

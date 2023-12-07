@@ -6,22 +6,23 @@ It inherits from the Tag class and provides the necessary methods to generate 's
 
 The 'select' tag is used to create a drop-down list of options for a form input.
 
-Features:
+# Features:
 - It is a container element and can hold other HTML elements.
 - It is considered a form element.
 
-Example Usage:
-    ```
-    option1 = Option(('value', 'option_value1'))
-    option1.add(String('Option Text1'))
+## Example Usage:
 
-    option2 = Option(('value', 'option_value2'))
-    option2.add(String('Option Text2'))
+```python
+option1 = Option(('value', 'option_value1'))
+option1.add(String('Option Text1'))
 
-    select = Select(('name', 'options'))
-    select.add(option1)
-    select.add(option2)
-    ```
+option2 = Option(('value', 'option_value2'))
+option2.add(String('Option Text2'))
+
+select = Select(('name', 'options'))
+select.add(option1)
+select.add(option2)
+```
 
 This would generate: <select name='options'><option value='option_value1'>Option Text1</option><option 
 value='option_value2'>Option Text2</option></select>

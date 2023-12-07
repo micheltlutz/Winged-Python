@@ -6,15 +6,17 @@ It inherits from the Tag class and provides necessary methods to generate 'ol' t
 
 The 'ol' tag is used for grouping a collection of items which have a numerical ordering, often displayed with numbers.
 
-Features:
+# Features:
 - It can act as a container and encapsulate other HTML elements.
 - It is not considered a form element.
 
-Example Usage:
-    ```
-    ol = Ol()   # Create an instance of OL
-    ol.add(Tag()) # Add other HTML elements as needed
-    ```
+
+## Example Usage:
+
+```python
+ol = Ol()   # Create an instance of OL
+ol.add(Tag()) # Add other HTML elements as needed
+```
 
 This results in the following HTML: <ol><tag></tag></ol>
 

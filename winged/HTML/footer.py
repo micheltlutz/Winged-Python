@@ -4,12 +4,13 @@ from winged.core.tag import Tag
  The Footer class is a specific implementation of the HTML 'footer' tag in the Winged-Python library.
  It inherits from the Tag class and provides the methods to generate HTML footer elements.
 
- Features:
+# Features:
  - It can hold other HTML elements as it is a container element.
  - It is not a form element.
 
- Example Usage:
-    ```
+ ## Example Usage:
+ 
+    ```python
     footer = Footer()
     footer.add(Tag())  # adding another generic tag inside the footer
     footer.generate()  # generates the HTML string

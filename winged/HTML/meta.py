@@ -5,7 +5,8 @@ This module defines a class called 'Meta' that represents a 'meta' HTML-like ele
 
 The 'Meta' class is a specific implementation of the 'Tag' class and is used to create and manipulate 'meta' elements within an HTML-like document. It specializes in handling 'meta' elements that are used to specify metadata about the document, such as character encoding, viewport settings, and more.
 
-Usage Example:
+# Usage Example:
+
 ```python
 from winged.core.tag import Tag
 

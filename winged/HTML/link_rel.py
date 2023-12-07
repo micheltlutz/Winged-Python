@@ -5,7 +5,8 @@ This module defines a class called 'LinkRel' that represents a 'link' HTML-like 
 
 The 'LinkRel' class is a specific implementation of the 'Tag' class and is used to create and manipulate 'link' elements within an HTML-like document. It specializes in handling 'link' elements that are used to specify relationships between the current document and external resources, such as stylesheets.
 
-Usage Example:
+# Usage Example:
+
 ```python
 from winged.core.tag import Tag
 

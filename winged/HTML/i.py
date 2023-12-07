@@ -4,15 +4,16 @@ from winged.core.tag import Tag
 The I class is a specific implementation of the HTML 'i' tag in the Winged-Python library.
 It inherits from the Tag class and provides the necessary methods to generate 'i' HTML elements.
 
-Features:
+# Features:
 - It is a container element and can hold other HTML elements.
 - It is not considered a form element.
 
-Example Usage:
-    ```
-    italic_text = I(text="This is an italic text")
-    italic_text.generate()  # generates the HTML string
-    ```
+## Example Usage:
+
+```python
+italic_text = I(text="This is an italic text")
+italic_text.generate()  # generates the HTML string
+```
 
 This would generate: <i>This is an italic text</i>
 

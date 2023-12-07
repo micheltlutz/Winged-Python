@@ -5,7 +5,8 @@ This module defines a class called 'String' for representing text strings within
 
 The 'String' class is a specific implementation of the 'GenericElement' class and is used to create and manipulate text strings as elements within a document. It inherits attributes and methods from the 'GenericElement' class and specializes in handling text content.
 
-Usage Example:
+# Usage Example:
+
 ```python
 from winged.core.generic_element import GenericElement
 

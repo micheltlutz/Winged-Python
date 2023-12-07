@@ -6,12 +6,13 @@ It inherits from the Tag class and provides the necessary methods for generating
 
 The 'dt' tag is used in description lists (dl), and it is used to name a term to be described in 'dd' tags.
 
-Features:
+# Features:
 - This class acts as a container and can contain other HTML elements.
 - It is not a form element.
 
-Example Usage:
-    ```
+## Example Usage:
+
+    ```python
     term = Dt()
     term.add(String("Example Term")) # Add term as needed
     ```
