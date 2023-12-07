@@ -1,14 +1,7 @@
 version: 2
 updates:
-  # Define as atualizações que você deseja monitorar e como deseja que o Dependabot as gerencie.
   - package-ecosystem: "pip"
     directory: "/"
     schedule:
       interval: "weekly"
-    # Você pode definir as atualizações que deseja monitorar por categoria.
-    # Neste exemplo, estamos monitorando todas as atualizações do Python.
-    allow:
-      - dependency-type: "all"
-    # Você pode definir o tipo de versão que deseja receber (e.g., patch, minor, major).
-    # Aqui, estamos permitindo todas as atualizações.
-    version: "widen"
+    open-pull-requests-limit: 10
