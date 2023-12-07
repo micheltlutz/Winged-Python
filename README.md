@@ -1,4 +1,8 @@
 # Winged-Python
+![main](https://github.com/micheltlutz/Winged-Python/actions/workflows/python-package.yml/badge.svg?branch=main)
+[![codecov](https://codecov.io/gh/micheltlutz/Winged-Python/graph/badge.svg?token=UvaQd65VVD)](https://codecov.io/gh/micheltlutz/Winged-Python)
+[![codebeat badge](https://codebeat.co/badges/b0a28fb9-ffba-4214-980f-a4333781f98f)](https://codebeat.co/projects/github-com-micheltlutz-winged-python-main)
+
 # =============
 
 Winged-Python is an innovative Domain-Specific Language (DSL) library for efficient HTML writing in Python. Mirroring its Swift counterpart, Winged-Python is based on the DSL concept, focusing on simplification and specificity in HTML generation. Using the Composite design pattern, the library enables developers to construct HTML structures in a logical, organized, and reusable manner.
