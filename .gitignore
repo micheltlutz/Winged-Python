@@ -1,5 +1,5 @@
-# Created by https://www.toptal.com/developers/gitignore/api/python,windows,macos,venv
-# Edit at https://www.toptal.com/developers/gitignore?templates=python,windows,macos,venv
+./import_maker.py
+./demo.py
 
 ### macOS ###
 # General
@@ -9,7 +9,6 @@
 
 # Icon must end with two \r
 Icon
-
 
 # Thumbnails
 ._*

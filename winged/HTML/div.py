@@ -1,6 +1,5 @@
 from winged.core.tag import Tag
 
-
 """
 This module defines a class called 'Div' that represents a 'div' HTML-like container element.
 
@@ -45,6 +44,7 @@ div_element.generate()
 HTML for layout purposes.
 
 """
+
 
 class Div(Tag):
     _tag = "div"

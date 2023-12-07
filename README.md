@@ -1,9 +1,3 @@
----
-runme:
-  id: 01HFHRQE7VJ1CY3GHYQ6ZX8NZM
-  version: v2.0
----
-
 # Winged-Python
 # =============
 
@@ -46,10 +40,10 @@ source venv/bin/activate
 python3 -m pip install -r requirements.txt
 ```
 
-## Run core tests
+## Run tests
 
 ```bash
-python -m unittest discover -s tests
+pytest
 ```
 
 ## TODO
