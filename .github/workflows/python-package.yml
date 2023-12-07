@@ -22,9 +22,10 @@ jobs:
     - name: Install dependencies
       run: pip install -r requirements.txt  # Substitua pelo comando real para instalar as dependências
 
-    - name: Run tests with pytest
-      run: pytest  # Substitua pelo comando real para executar os testes com pytest
-    
+    - name: Run tests with pytest and coverage
+      run: |
+        pytest --cov=app --cov-report=xml --cov-report=term
+
     - name: Upload coverage reports to Codecov
       uses: codecov/codecov-action@v3
       env:
