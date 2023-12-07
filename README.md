@@ -20,7 +20,9 @@ User OS terminal or IDE terminal
 
 ```bash
 python3 -m venv venv
+```
 
+```bash
 source venv/bin/activate
 ```
 
@@ -45,6 +47,72 @@ python3 -m pip install -r requirements.txt
 ```bash
 pytest
 ```
+
+## Basic Usage
+
+```python
+
+from winged.HTML.div import Div
+from winged.HTML.h import H
+from winged.HTML.table import Table
+from winged.HTML.string import String
+
+divC = Div(("class", "container"))
+
+h = H("1")
+h.add(String("Hello World"))
+divC.add(h)
+
+table = Table()
+table.add_table_headers(["Name", "Age", "Height", "Location"])  # Define headers
+
+table.add_row()
+table.add_in_row(String("John"))
+table.add_in_row(String("25"))
+table.add_in_row(String("1.80"))
+table.add_in_row(String("New York"))
+
+table.add_row()
+table.add_in_row(String("Maria"))
+table.add_in_row(String("23"))
+table.add_in_row(String("1.50"))
+table.add_in_row(String("New Jersey"))
+
+divC.add(table)
+
+print(divC.generate())
+```
+
+## Output
+
+```html
+<div class="container">
+  <h1>Hello World</h1>
+  <table>
+    <thead>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Height</th>
+      <th>Location</th>
+    </thead>
+    <tbody>
+      <tr>
+        <td>John</td>
+        <td>25</td>
+        <td>1.80</td>
+        <td>New York</td>
+      </tr>
+      <tr>
+        <td>Maria</td>
+        <td>23</td>
+        <td>1.50</td>
+        <td>New Jersey</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+```
+
 
 ## TODO
 
