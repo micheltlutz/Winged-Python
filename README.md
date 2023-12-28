@@ -7,9 +7,22 @@
 
 # =============
 
+
 Winged-Python is an innovative Domain-Specific Language (DSL) library for efficient HTML writing in Python. Mirroring its Swift counterpart, Winged-Python is based on the DSL concept, focusing on simplification and specificity in HTML generation. Using the Composite design pattern, the library enables developers to construct HTML structures in a logical, organized, and reusable manner.
 
 This library is created to be fully independent, not requiring integration with specific server frameworks or front-end libraries. This offers developers the freedom to use Winged-Python across a variety of projects, from simple static pages to complex web applications, keeping the code clean, readable, and efficient.
+
+
+## PyPI Releases Page
+
+- [Releases Page](https://pypi.org/manage/project/winged-python/releases/)
+
+
+## Install
+
+```bash
+pip install winged-python==0.1.0
+```
 
 ## Usage Example
 
