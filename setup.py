@@ -7,7 +7,7 @@ setup(
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
     author='Michel Anderson Lutz Teixeira',
-    author_email='michel_lutz@icloud.com',
+    author_email='hi@micheltlutz.me',
     url='https://github.com/micheltlutz/winged-python',
     packages=find_packages(),
     install_requires=[],
