@@ -24,7 +24,7 @@ This library is created to be fully independent, not requiring integration with 
 pip install winged-python==0.1.0
 ```
 
-## Usage Example
+## Simple Usage Example
 
 
 ```python
@@ -88,6 +88,26 @@ print(divC.generate())
     </tbody>
   </table>
 </div>
+```
+
+## Usage with FastAPI Render
+
+```python
+from fastapi import FastAPI
+from fastapi.responses import HTMLResponse
+
+from winged.HTML.div import Div
+from winged.HTML.h import H
+from winged.HTML.string import String
+
+
+@app.get('/', response_class=HTMLResponse)
+async def home():
+    divC = Div(("class", "container"))
+    h = H("1")
+    h.add(String("Hello World"))
+    divC.add(h)
+    return divC.get_string()  # Return HTML String
 ```
 
 ## Contributing
