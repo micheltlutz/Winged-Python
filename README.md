@@ -4,7 +4,7 @@
 [![codecov](https://codecov.io/gh/micheltlutz/Winged-Python/graph/badge.svg?token=UvaQd65VVD)](https://codecov.io/gh/micheltlutz/Winged-Python)
 [![codebeat badge](https://codebeat.co/badges/b0a28fb9-ffba-4214-980f-a4333781f98f)](https://codebeat.co/projects/github-com-micheltlutz-winged-python-main)
 [![Reviewed by Hound](https://img.shields.io/badge/Reviewed_by-Hound-8E64B0.svg)](https://houndci.com)
-
+[![PyPI version](https://badge.fury.io/py/winged-python.svg)](https://badge.fury.io/py/winged-python)
 # =============
 
 
@@ -14,8 +14,8 @@ This library is created to be fully independent, not requiring integration with 
 
 
 ## PyPI Releases Page
-
-- [Releases Page](https://pypi.org/manage/project/winged-python/releases/)
+https://pypi.org/project/winged-python/
+- [Releases Page]([https://pypi.org/manage/project/winged-python/releases/](https://pypi.org/project/winged-python/))
 
 
 ## Install
