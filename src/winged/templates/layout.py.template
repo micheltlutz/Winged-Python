@@ -1,0 +1,16 @@
+"""The site's shared shell. Satisfies `winged.Layout` by defining `render`."""
+
+from winged import A, Body, Footer, Header, Li, Nav, P, Ul
+from winged.core.render import Node
+
+
+class SiteLayout:
+    def __init__(self, site_title: str) -> None:
+        self.site_title = site_title
+
+    def render(self, content: Node) -> Node:
+        return Body(
+            Header(Nav(A(self.site_title, href="/", cls="logo"), Ul(Li(A("Home", href="/"))))),
+            content,
+            Footer(P(f"© 2026 {self.site_title}")),
+        )
