@@ -1,7 +1,15 @@
 version: 2
 updates:
-  - package-ecosystem: "pip"
-    directory: "/"
+  - package-ecosystem: pip
+    directory: /
     schedule:
-      interval: "weekly"
+      interval: weekly
+    open-pull-requests-limit: 10
+
+  # Without this, the workflows stay pinned wherever they were written. That is exactly
+  # how Winged-Python ended up on actions/checkout@v2 three years after v4 shipped.
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
     open-pull-requests-limit: 10

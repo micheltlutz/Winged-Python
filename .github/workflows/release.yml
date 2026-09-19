@@ -1,0 +1,42 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*.*.*"]
+
+jobs:
+  release:
+    name: Build, verify and publish
+    runs-on: ubuntu-latest
+    environment: release
+    permissions:
+      contents: write
+      id-token: write   # PyPI trusted publishing. No long-lived token in secrets.
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install -e . pytest pytest-cov ruff mypy build
+      - name: Verify
+        run: ./scripts/verify.sh
+
+      - name: Build distributions
+        run: |
+          rm -rf dist
+          python -m build
+
+      - name: Extract this version's changelog section
+        id: notes
+        run: |
+          VERSION="${GITHUB_REF_NAME#v}"
+          sed -n "/## \[$VERSION\]/,/## \[/p" CHANGELOG.md | sed '$d' > RELEASE_NOTES.md
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+      - uses: softprops/action-gh-release@v2
+        with:
+          body_path: RELEASE_NOTES.md
+          files: dist/*
+
+      - uses: pypa/gh-action-pypi-publish@release/v1

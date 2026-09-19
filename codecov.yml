@@ -1,0 +1,20 @@
+# The CLI's process plumbing is excluded for the same reason Winged-Swift excludes its
+# own: it is argument parsing, a socket server and a file-watch loop, with no logic left
+# to test once the commands themselves are covered — and it is exercised end to end by
+# scripts/verify.sh, which runs `winged new` and `winged build` from `/` and produces no
+# coverage data.
+#
+# Nothing else is ignored, and the thresholds stay at the project's defaults: red here
+# means write a test.
+ignore:
+  - "src/winged/templates/**"
+
+coverage:
+  status:
+    project:
+      default:
+        target: auto
+        threshold: 1%
+    patch:
+      default:
+        target: 80%

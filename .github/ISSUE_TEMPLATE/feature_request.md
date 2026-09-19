@@ -1,20 +1,20 @@
 ---
 name: Feature request
-about: Suggest an idea for this project
-title: ''
-labels: ''
-assignees: ''
-
+about: Something the library cannot express, or expresses badly
+labels: enhancement
 ---
 
-**Is your feature request related to a problem? Please describe.**
-A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+## The problem
 
-**Describe the solution you'd like**
-A clear and concise description of what you want to happen.
+<!-- What are you trying to build, and what stops you? Describe the problem before the
+solution — ROADMAP.md is written the same way. -->
 
-**Describe alternatives you've considered**
-A clear and concise description of any alternative solutions or features you've considered.
+## What you do today
 
-**Additional context**
-Add any other context or screenshots about the feature request here.
+<!-- The workaround, if there is one. -->
+
+## What you would like to write
+
+```python
+# The call site you wish existed.
+```
