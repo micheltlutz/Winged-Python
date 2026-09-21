@@ -5,6 +5,17 @@ All notable changes to Winged-Python are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Changed
+
+- **The workflow actions moved to the Node 24 runtime** — `actions/checkout` v4 to v7,
+  `actions/setup-python` v5 to v7, `softprops/action-gh-release` v2 to v3,
+  `codecov/codecov-action` v5 to v7. Every run was printing a deprecation notice and
+  being forced onto Node 24 anyway. Nothing here uses what the new majors dropped:
+  `checkout` v7 only restricts forked-PR checkout under `pull_request_target`, and
+  `setup-python` v7 removed the `pip-install` input.
+
 ## [1.0.0] - 2026-09-21
 
 Parity with [Winged-Swift](https://github.com/micheltlutz/Winged-Swift) 2.0.0, demonstrated
