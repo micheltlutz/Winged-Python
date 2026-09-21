@@ -91,7 +91,7 @@ jobs:
           python-version: "3.12"
       - run: pip install -e . pytest pytest-cov
       - run: pytest -q
-      - uses: codecov/codecov-action@v5
+      - uses: codecov/codecov-action@v7
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: coverage.xml
