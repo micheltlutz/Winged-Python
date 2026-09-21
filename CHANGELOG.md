@@ -5,7 +5,7 @@ All notable changes to Winged-Python are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.0.0] - 2026-09-18
+## [1.0.0] - 2026-09-21
 
 Parity with [Winged-Swift](https://github.com/micheltlutz/Winged-Swift) 2.0.0, demonstrated
 rather than claimed: `tests/test_golden.py` reproduces all four of Winged-Swift's golden
@@ -26,6 +26,11 @@ fixtures byte for byte.
 - **`RenderOptions`** — `pretty`, `indent`, `xhtml_self_closing`, passed per call rather
   than held as global state. 0.1.0 had no pretty printing; its README showed indented
   output the library could not produce.
+- **`render` and `render_into`** — `render` returns the markup as a string; `render_into`
+  writes it straight into a text file object, so memory stays flat on a page large enough
+  that you would rather not hold it twice. What a node writes into is the `Buffer`
+  protocol, which is what makes a list and a file interchangeable without any
+  `write_into` knowing which it got.
 - **`Document`** — owns `<!DOCTYPE html>` and `<html lang>`.
 - **`Fragment`, `RawHtml`, `Comment`, `Text`** — a transparent group, an explicit raw
   injection, a comment that refuses `--`, and escaped text.
@@ -42,7 +47,13 @@ fixtures byte for byte.
   output directory.
 - **`accessibility.audit`** — eight rules (`img-alt`, `button-label`, `iframe-title`,
   `link-text`, `heading-order`, `html-lang`, `form-label`, `duplicate-id`). This is the
-  check Winged-Swift's `ROADMAP.md` asks for and has not shipped.
+  check Winged-Swift's `ROADMAP.md` asks for and has not shipped. Three of them are
+  deliberately not naive: `link-text` looks at every `<img>` under the link rather than
+  its direct children, so the ordinary `<a><span><img></span></a>` icon link is checked;
+  `heading-order` treats `<section>`, `<article>`, `<aside>` and `<nav>` as opening a new
+  heading context, so an `<h3>` starting a section after an `<h1>` is not a finding; and
+  `form-label` reads the whole tree before it judges, so a `<label for=…>` placed after
+  its input — what a CSS sibling selector needs — still counts.
 - **The `winged` CLI** — `winged new`, `winged build`, `winged serve [--watch]`.
   Stdlib only; the dev server refuses to serve outside its root and binds `127.0.0.1`.
 - **`Layout`** — a `typing.Protocol`, satisfied by defining `render` with no base class.

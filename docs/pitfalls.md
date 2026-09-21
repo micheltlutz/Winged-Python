@@ -97,7 +97,9 @@ Only elements with element children get indented. This matches Winged-Swift's fi
 ## 12. Looking for 0.1.0's names
 
 `Tag`, `String`, `GenericElement`, `Doctype`, `H(1, …)`, `LinkRel`, `get_string()`,
-`add()` — all gone. [MIGRATION.md](../MIGRATION.md) maps each one.
+`add()` — all gone.
+[MIGRATION.md](https://github.com/micheltlutz/Winged-Python/blob/main/MIGRATION.md)
+maps each one.
 
 ## 13. Assuming a URL is validated
 

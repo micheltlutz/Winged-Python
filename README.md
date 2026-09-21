@@ -125,6 +125,16 @@ Options are a value passed per call, never global state, so two callers can rend
 differently at the same time. `<pre>`, `<code>` and `<textarea>` stay compact even in
 pretty mode, because indentation inside them changes what the browser displays.
 
+`render` builds the whole string first. For a page large enough that you would rather not
+hold it twice, `render_into` writes straight into any text file object instead:
+
+```python
+from winged import render_into
+
+with open("dist/index.html", "w", encoding="utf-8", newline="\n") as handle:
+    render_into(page, handle)
+```
+
 ### Fragments, raw markup and comments
 
 ```python
@@ -226,6 +236,12 @@ Eight rules: `img-alt`, `button-label`, `iframe-title`, `link-text`, `heading-or
 whether a finding should fail your build is your decision. Two of the rules are already
 unreachable through the normal constructors, because `Img` requires `alt` and `Iframe`
 requires `title`.
+
+Three of them are deliberately not naive: `link-text` looks at every `<img>` under the
+link, not only its direct children; `heading-order` treats `<section>`, `<article>`,
+`<aside>` and `<nav>` as opening a new heading context, so an `<h3>` starting a section
+after an `<h1>` is not a finding; and `form-label` reads the whole tree before it judges,
+so a `<label for=…>` placed *after* its input still counts.
 
 ## Escaping
 

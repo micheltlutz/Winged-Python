@@ -45,11 +45,10 @@ Open questions, not commitments:
 
 ## Quality
 
-- **Streaming render.** `render()` builds one string in memory. Writing directly into a
-  file object would keep memory flat for very large pages.
-- **The `link-text` a11y rule is shallow.** It only looks at direct `<img>` children of an
-  `<a>`; a link wrapping a `<span><img></span>` is not caught.
-- **`heading-order` does not track document sections.** It compares against the last
-  heading seen anywhere in the tree, so a legitimate `<h3>` opening a new `<section>`
-  after an `<h1>` is reported. Scoping it to sectioning elements would fix it.
+- **`StaticSiteGenerator` still buffers each page.** `render_into` exists, but `generate`
+  renders to a string and writes it in one call, on purpose: a render that raises halfway
+  cannot then leave a truncated file on disk. Streaming it needs a write-to-temp-and-move
+  step first.
+- **The audit has no `color-contrast` or `tabindex` rule**, and cannot have the first one
+  — contrast needs the computed CSS, which this library never sees.
 - **No Sphinx or API reference site.** The docstrings are there; nothing renders them.
