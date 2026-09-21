@@ -1,38 +1,27 @@
 ---
 name: Bug report
-about: Create a report to help us improve
-title: ''
-labels: ''
-assignees: ''
-
+about: Markup that is wrong, or an error you did not expect
+labels: bug
 ---
 
-**Describe the bug**
-A clear and concise description of what the bug is.
+## What happened
 
-**To Reproduce**
-Steps to reproduce the behavior:
-1. Go to '...'
-2. Click on '....'
-3. Scroll down to '....'
-4. See error
+<!-- The markup produced, or the traceback. -->
 
-**Expected behavior**
-A clear and concise description of what you expected to happen.
+## What you expected
 
-**Screenshots**
-If applicable, add screenshots to help explain your problem.
+<!-- The markup you expected instead. -->
 
-**Desktop (please complete the following information):**
- - OS: [e.g. iOS]
- - Browser [e.g. chrome, safari]
- - Version [e.g. 22]
+## Minimal reproduction
 
-**Smartphone (please complete the following information):**
- - Device: [e.g. iPhone6]
- - OS: [e.g. iOS8.1]
- - Browser [e.g. stock browser, safari]
- - Version [e.g. 22]
+```python
+from winged import Div, render
 
-**Additional context**
-Add any other context about the problem here.
+print(render(Div("...")))
+```
+
+## Environment
+
+- Winged-Python version: <!-- python -c "import winged; print(winged.__version__)" -->
+- Python version: <!-- python --version -->
+- OS:

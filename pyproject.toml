@@ -1,0 +1,80 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "winged-python"
+version = "1.0.0"
+description = "A dependency-free DSL for writing HTML in Python."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Michel Anderson Lutz Teixeira", email = "hi@micheltlutz.me" }]
+keywords = ["html", "dsl", "static-site-generator", "ssg", "templating", "seo"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Text Processing :: Markup :: HTML",
+    "Topic :: Software Development :: Code Generators",
+    "Typing :: Typed",
+]
+# Intentionally empty, and it must stay that way. WingedSwift is Foundation-only;
+# this port is stdlib-only. The CLI uses argparse and http.server for the same reason.
+dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/micheltlutz/Winged-Python"
+Documentation = "https://github.com/micheltlutz/Winged-Python#readme"
+Changelog = "https://github.com/micheltlutz/Winged-Python/blob/main/CHANGELOG.md"
+Issues = "https://github.com/micheltlutz/Winged-Python/issues"
+Source = "https://github.com/micheltlutz/Winged-Python"
+
+[project.scripts]
+winged = "winged.cli:main"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
+    "pytest-cov>=5.0",
+    "ruff>=0.6",
+    "mypy>=1.11",
+    "build>=1.2",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/winged"]
+
+[tool.ruff]
+line-length = 100
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "RUF"]
+
+[tool.ruff.lint.per-file-ignores]
+# Generated. `I` is the <i> element and `A` is <a>: HTML tag names are one character
+# sometimes, and renaming them to satisfy a linter would make the DSL lie about the
+# markup it produces. WingedSwift sets SwiftLint's `type_name.min_length` to 1 for the
+# same reason. The builtin shadowing (Input, Map) is the same story.
+# RUF022 wants isort's ordering for __all__; the generator emits plain alphabetical
+# order, which is what docs/tag-catalog.md is sorted by too.
+"src/winged/elements.py" = ["A001", "A003", "E742", "RUF022"]
+
+[tool.mypy]
+strict = true
+files = ["src/winged", "tests", "scripts"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--cov=winged --cov-report=term-missing --cov-report=xml --cov-fail-under=90"
+
+[tool.coverage.run]
+branch = true
+source = ["winged"]

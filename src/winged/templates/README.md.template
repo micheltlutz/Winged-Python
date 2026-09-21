@@ -1,0 +1,11 @@
+# __NAME__
+
+Built with [Winged-Python](https://github.com/micheltlutz/Winged-Python).
+
+```bash
+winged build           # write dist/
+winged serve --watch   # preview at http://127.0.0.1:8000, rebuilding on change
+```
+
+`site.py` generates the pages, `layout.py` holds the shared shell, `assets/` is copied
+verbatim. `dist/` is generated output — do not edit or commit it.

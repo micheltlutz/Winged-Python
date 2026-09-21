@@ -1,0 +1,112 @@
+"""The single declarative table every element is generated from.
+
+Adding an element is one row here, then ``python scripts/generate_elements.py``. Nothing
+about a tag is written twice, which is why ``docs/tag-catalog.md`` can be generated rather
+than maintained.
+
+Each row is ``(python_name, html_tag, group)``. Void-ness and whitespace sensitivity are
+not repeated here -- they live in ``winged.core.tags``, which is the one place that knows.
+"""
+
+from __future__ import annotations
+
+__all__ = ["TAGS"]
+
+TAGS: tuple[tuple[str, str, str], ...] = (
+    # -- Commons ---------------------------------------------------------------------
+    ("A", "a", "Commons"),
+    ("Abbr", "abbr", "Commons"),
+    ("Address", "address", "Commons"),
+    ("Article", "article", "Commons"),
+    ("Aside", "aside", "Commons"),
+    ("Base", "base", "Commons"),
+    ("Blockquote", "blockquote", "Commons"),
+    ("Body", "body", "Commons"),
+    ("Br", "br", "Commons"),
+    ("Button", "button", "Commons"),
+    ("Canvas", "canvas", "Commons"),
+    ("Cite", "cite", "Commons"),
+    ("Dd", "dd", "Commons"),
+    ("Del", "del", "Commons"),
+    ("Details", "details", "Commons"),
+    ("Dialog", "dialog", "Commons"),
+    ("Div", "div", "Commons"),
+    ("Dl", "dl", "Commons"),
+    ("Dt", "dt", "Commons"),
+    ("Em", "em", "Commons"),
+    ("Figcaption", "figcaption", "Commons"),
+    ("Figure", "figure", "Commons"),
+    ("Footer", "footer", "Commons"),
+    ("H1", "h1", "Commons"),
+    ("H2", "h2", "Commons"),
+    ("H3", "h3", "Commons"),
+    ("H4", "h4", "Commons"),
+    ("H5", "h5", "Commons"),
+    ("H6", "h6", "Commons"),
+    ("Head", "head", "Commons"),
+    ("Header", "header", "Commons"),
+    ("Hr", "hr", "Commons"),
+    ("I", "i", "Commons"),
+    ("Ins", "ins", "Commons"),
+    ("Kbd", "kbd", "Commons"),
+    ("Li", "li", "Commons"),
+    ("Link", "link", "Commons"),
+    ("Main", "main", "Commons"),
+    ("Mark", "mark", "Commons"),
+    ("Meta", "meta", "Commons"),
+    ("Nav", "nav", "Commons"),
+    ("Noscript", "noscript", "Commons"),
+    ("Ol", "ol", "Commons"),
+    ("P", "p", "Commons"),
+    ("Picture", "picture", "Commons"),
+    ("Q", "q", "Commons"),
+    ("Samp", "samp", "Commons"),
+    ("Script", "script", "Commons"),
+    ("Section", "section", "Commons"),
+    ("Small", "small", "Commons"),
+    ("Span", "span", "Commons"),
+    ("Strong", "strong", "Commons"),
+    ("Style", "style", "Commons"),
+    ("Sub", "sub", "Commons"),
+    ("Summary", "summary", "Commons"),
+    ("Sup", "sup", "Commons"),
+    ("Table", "table", "Commons"),
+    ("Td", "td", "Commons"),
+    ("Th", "th", "Commons"),
+    ("Time", "time", "Commons"),
+    ("Title", "title", "Commons"),
+    ("Tr", "tr", "Commons"),
+    ("Ul", "ul", "Commons"),
+    ("Var", "var", "Commons"),
+    ("Wbr", "wbr", "Commons"),
+    # -- Forms -----------------------------------------------------------------------
+    ("Datalist", "datalist", "Forms"),
+    ("Fieldset", "fieldset", "Forms"),
+    ("Form", "form", "Forms"),
+    ("Input", "input", "Forms"),
+    ("Label", "label", "Forms"),
+    ("Legend", "legend", "Forms"),
+    ("Meter", "meter", "Forms"),
+    ("Optgroup", "optgroup", "Forms"),
+    ("Option", "option", "Forms"),
+    ("Output", "output", "Forms"),
+    ("Progress", "progress", "Forms"),
+    ("Select", "select", "Forms"),
+    ("Textarea", "textarea", "Forms"),
+    # -- Tables ----------------------------------------------------------------------
+    ("Caption", "caption", "Tables"),
+    ("Col", "col", "Tables"),
+    ("Colgroup", "colgroup", "Tables"),
+    ("Tbody", "tbody", "Tables"),
+    ("Tfoot", "tfoot", "Tables"),
+    ("Thead", "thead", "Tables"),
+    # -- Media -----------------------------------------------------------------------
+    ("Audio", "audio", "Media"),
+    ("Source", "source", "Media"),
+    ("Track", "track", "Media"),
+    ("Video", "video", "Media"),
+    # -- Code ------------------------------------------------------------------------
+    ("Code", "code", "Code"),
+    ("Embed", "embed", "Code"),
+    ("Pre", "pre", "Code"),
+)

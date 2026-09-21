@@ -1,0 +1,64 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*.*.*"]
+
+jobs:
+  release:
+    name: Build, verify and publish
+    runs-on: ubuntu-latest
+    environment: release
+    permissions:
+      contents: write
+      id-token: write   # PyPI trusted publishing. No long-lived token in secrets.
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install -e . pytest pytest-cov ruff mypy build
+      - name: Verify
+        run: ./scripts/verify.sh
+
+      - name: Build distributions
+        run: |
+          rm -rf dist
+          python -m build
+
+      # A tag is the only trigger here, so everything downstream trusts it. These three
+      # checks are what make that safe: a tag that disagrees with pyproject.toml, or that
+      # the changelog has never heard of, fails before anything is published.
+      - name: Check the tag, pyproject.toml and CHANGELOG.md agree
+        run: |
+          VERSION="${GITHUB_REF_NAME#v}"
+          PACKAGED=$(python -c "import tomllib; print(tomllib.load(open('pyproject.toml','rb'))['project']['version'])")
+          if [ "$VERSION" != "$PACKAGED" ]; then
+            echo "::error::tag $GITHUB_REF_NAME does not match pyproject.toml version $PACKAGED"
+            exit 1
+          fi
+          grep -qF "## [$VERSION]" CHANGELOG.md || {
+            echo "::error::CHANGELOG.md has no '## [$VERSION]' section"
+            exit 1
+          }
+
+      - name: Extract this version's changelog section
+        id: notes
+        run: |
+          VERSION="${GITHUB_REF_NAME#v}"
+          awk -v v="## [$VERSION]" '
+            index($0, v) == 1 { inside = 1; next }
+            inside && /^## \[/ { exit }
+            inside { print }
+          ' CHANGELOG.md > RELEASE_NOTES.md
+          # An empty body would publish a release nobody can read.
+          [ -s RELEASE_NOTES.md ] || { echo "::error::release notes came out empty"; exit 1; }
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+      - uses: softprops/action-gh-release@v2
+        with:
+          body_path: RELEASE_NOTES.md
+          files: dist/*
+
+      - uses: pypa/gh-action-pypi-publish@release/v1

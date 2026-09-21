@@ -1,31 +1,54 @@
 # Security Policy
 
-## Reporting a Vulnerability
+## Reporting a vulnerability
 
-At Winged-Python, we take security seriously. We welcome and appreciate responsible disclosure of security vulnerabilities.
+Email <michel_lutz@icloud.com> with a description and, if you can, a minimal reproduction.
+Please do not open a public issue for a vulnerability. You can expect an acknowledgement
+within a few days.
 
-If you discover a security vulnerability in this project, please follow these steps to report it:
+## Supported versions
 
-1. **Privately Notify Us**: Please send an email to [michel_lutz@icloud.com](mailto:michel_lutz@icloud.com]) with details of the vulnerability. Please do not disclose the issue publicly until we have had a chance to review and address it.
+| Version | Supported |
+| --- | --- |
+| 1.0.x | ✅ |
+| 0.1.x | ❌ — see below |
 
-2. **Provide Information**: In your email, include a clear description of the vulnerability, steps to reproduce it, and any supporting documentation or proof-of-concept code.
+**0.1.x performs no output escaping of any kind** and should not be used with data you do
+not control. There is no patch path; upgrade to 1.0 (see [MIGRATION.md](MIGRATION.md)).
 
-3. **Cooperate with Us**: We may need to work with you to better understand the issue, so please be prepared to provide additional information or assist with testing.
+## What this library does about escaping
 
-4. **Responsible Disclosure**: We will work diligently to address the vulnerability and will keep you updated on our progress. Once the issue is resolved and a fix is available, we will coordinate with you to determine the appropriate time for disclosure.
+Winged-Python builds a string of HTML. Its entire security surface is which characters
+reach the output unchanged.
 
-## Supported Versions
+**Escaped by default:**
 
-We strive to support and provide security updates for the latest stable version of Winged-Python. If you are using an older version, we encourage you to update to the latest release to ensure you have access to security patches and enhancements.
+- Text children. `Div("<script>")` renders `<div>&lt;script&gt;</div>`. A bare `str` child
+  becomes a `Text` node, and `Text` escapes `&`, `<`, `>`, `"` and `'`.
+- Attribute values, at construction — `Attribute("title", value)` escapes `&`, `"` and
+  `'`. Inside a quoted value, `<` and `>` are not delimiters, so they are left readable.
+- Every value in the sitemap and RSS generators, via `escape_xml`.
+- Values passed to `add_class`, `set_id`, `set_style`, `attr`, `data_attr` and
+  `aria_attr`. Escaping happens once, so repeated `add_class` calls do not double-escape.
 
-## Security Best Practices
+**Not escaped, by design:**
 
-To enhance the security of your Winged-Python installation, we recommend following these best practices:
+- `RawHtml(...)`. This is the only way to inject markup verbatim, and it is deliberately
+  conspicuous at the call site. **Never pass user input to it.**
+- `Attribute.raw(...)`, used internally for meta tag keys such as `og:title`.
+- `Element.text(content, escape=False)`.
 
-- Keep your dependencies up to date.
-- Review and apply security updates promptly.
-- Limit access to your Winged-Python instance to trusted individuals.
-- Regularly review and audit your code for security vulnerabilities.
-- Implement strong authentication and authorization mechanisms.
+**What escaping does not protect you from:**
 
-Thank you for helping us keep Winged-Python secure. Your cooperation and responsible disclosure are greatly appreciated.
+- A `javascript:` URL in `A(href=...)` or `Script(src=...)`. The value is escaped, so it
+  cannot break out of the attribute, but the URL scheme is not inspected. Validate URLs
+  that come from data. (Winged-Swift's `ROADMAP.md` lists a URL policy for 3.0; the same
+  gap exists here.)
+- Content inside `<script>` or `<style>`, where HTML escaping is the wrong escaping. Do
+  not build either from untrusted data.
+
+## The `winged serve` development server
+
+`winged serve` is a development tool. It binds `127.0.0.1`, refuses paths that resolve
+outside the directory it is serving, and does not follow symlinks out of it. It is not
+hardened for public exposure — do not put it on a public interface.

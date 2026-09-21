@@ -1,0 +1,44 @@
+"""Generate the site. Run with `winged build`, or `python site.py`."""
+
+from pathlib import Path
+
+from winged import A, Body, Footer, H1, Header, Head, Li, Link, Main, Nav, P, Title, Ul
+from winged.document import Document
+from winged.seo import SeoBuilder
+from winged.sitemap import SitemapGenerator, SitemapUrl
+from winged.ssg import StaticSiteGenerator
+
+from layout import SiteLayout
+
+# Resolved from this file, never from the current directory: a generator that uses
+# relative paths passes every test and still fails when run from somewhere else.
+ROOT = Path(__file__).resolve().parent
+SITE_URL = "https://example.com"
+
+
+def home() -> Document:
+    seo = SeoBuilder(
+        title="__NAME__",
+        description="A site built with Winged-Python.",
+        image=f"{SITE_URL}/og.jpg",
+        url=SITE_URL,
+    )
+    head = Head(seo.build(), Title("__NAME__"), Link(href="/css/style.css", rel="stylesheet"))
+    content = Main(H1("__NAME__"), P("Hello from Winged-Python."))
+    return Document(head, SiteLayout("__NAME__").render(content))
+
+
+def main() -> None:
+    site = StaticSiteGenerator(ROOT / "dist")
+    site.clean()
+    site.generate(home(), "index.html")
+    site.copy_asset(ROOT / "assets" / "css" / "style.css", "css/style.css")
+    site.write_file(
+        SitemapGenerator(SITE_URL).generate([SitemapUrl("/", changefreq="weekly", priority=1.0)]),
+        "sitemap.xml",
+    )
+    print(f"built into {site.output_directory}")
+
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,117 @@
+"""Ports HTMLTagTests, HTML5TagsTests, WhitespaceTests and PrettyPrintTests."""
+
+from __future__ import annotations
+
+import io
+from pathlib import Path
+
+import pytest
+
+from winged import (
+    Br,
+    Code,
+    Col,
+    Div,
+    Element,
+    Img,
+    Input,
+    P,
+    Pre,
+    RenderOptions,
+    Strong,
+    render,
+    render_into,
+)
+
+PRETTY = RenderOptions.pretty_()
+
+
+def test_void_elements_have_no_closing_tag() -> None:
+    # 0.1.0 rendered <col></col> and <source></source>.
+    assert render(Br()) == "<br>"
+    assert render(Col()) == "<col>"
+
+
+def test_void_element_refuses_a_child() -> None:
+    # 0.1.0 accepted the child and silently discarded it.
+    with pytest.raises(ValueError, match="void element"):
+        Element("br", P("x"))
+
+
+def test_xhtml_self_closing() -> None:
+    xhtml = RenderOptions(xhtml_self_closing=True)
+    assert render(Img("x", "y"), xhtml) == '<img src="x" alt="y" />'
+
+
+def test_state_is_per_instance() -> None:
+    # 0.1.0 held _tag, _attributes and _children as class attributes.
+    first, second = Div(), Div()
+    first.child(P("x"))
+    assert render(second) == "<div></div>"
+
+
+def test_rendering_is_idempotent() -> None:
+    # 0.1.0's Table.get_string() appended its rows on every call.
+    tree = Div(P("x"))
+    assert render(tree) == render(tree) == "<div><p>x</p></div>"
+
+
+def test_keyword_attributes() -> None:
+    assert render(Div(cls="a", data_user_id="7", hidden=True)) == (
+        '<div class="a" data-user-id="7" hidden></div>'
+    )
+
+
+def test_false_and_none_attributes_are_omitted() -> None:
+    assert render(Input(type_="text", disabled=False, placeholder=None)) == '<input type="text">'
+
+
+def test_name_attribute_does_not_collide_with_the_tag_name() -> None:
+    assert render(Input(type_="email", name="email")) == '<input type="email" name="email">'
+
+
+def test_text_children_render_inline_in_pretty_mode() -> None:
+    assert render(P("Fuel & chain"), PRETTY) == "<p>Fuel &amp; chain</p>"
+
+
+def test_element_children_are_indented() -> None:
+    assert render(Div(P("a"), P("b")), PRETTY) == "<div>\n  <p>a</p>\n  <p>b</p>\n</div>"
+
+
+def test_whitespace_sensitive_subtrees_stay_compact() -> None:
+    # Indentation injected into <pre> changes what the browser displays.
+    assert render(Pre(Code("  two\n  lines")), PRETTY) == "<pre><code>  two\n  lines</code></pre>"
+
+
+def test_mixed_content() -> None:
+    assert render(P("Hello ", Strong("world"))) == "<p>Hello <strong>world</strong></p>"
+
+
+def test_render_into_writes_the_same_markup(tmp_path: Path) -> None:
+    page = Div(P("a"), P("<b>"))
+    target = tmp_path / "page.html"
+    with target.open("w", encoding="utf-8", newline="\n") as handle:
+        render_into(page, handle)
+    assert target.read_text(encoding="utf-8") == render(page)
+
+
+def test_render_into_honours_options() -> None:
+    page = Div(P("a"))
+    buffer = io.StringIO()
+    render_into(page, buffer, PRETTY)
+    assert buffer.getvalue() == render(page, PRETTY)
+
+
+def test_render_into_never_holds_the_whole_page() -> None:
+    """The point of streaming: chunks arrive as they are produced, not in one write."""
+    chunks: list[str] = []
+
+    class Recorder:
+        def write(self, chunk: str, /) -> int:
+            chunks.append(chunk)
+            return len(chunk)
+
+    render_into(Div(P("a"), P("b")), Recorder())
+    assert "".join(chunks) == "<div><p>a</p><p>b</p></div>"
+    assert len(chunks) > 1
+    assert max(len(chunk) for chunk in chunks) < 10

@@ -1,0 +1,27 @@
+# AGENTS.md — __NAME__
+
+A static site built with [Winged-Python](https://github.com/micheltlutz/Winged-Python).
+
+## Commands
+
+| Task | Command |
+| --- | --- |
+| Build the site | `winged build` |
+| Preview it | `winged serve --watch` |
+| Check accessibility | `winged build --check-a11y` |
+
+## Layout
+
+- `site.py` — the generator. Every page is a function returning a `Document`.
+- `layout.py` — the shared shell. It satisfies `winged.Layout` by defining `render`.
+- `assets/` — copied into `dist/` verbatim.
+- `dist/` — generated. Never edit it, never commit it.
+
+## Rules
+
+1. Text content is escaped. Pass a plain `str`; reach for `RawHtml` only for markup you
+   produced yourself, and never for anything that came from data.
+2. Paths resolve from `ROOT`, not the current directory.
+3. Void elements (`Br`, `Img`, `Input`, …) take no children.
+4. `Img` requires `alt` and `Iframe` requires `title`. That is deliberate.
+5. Run `winged build` before saying a change is done.

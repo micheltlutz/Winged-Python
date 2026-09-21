@@ -1,0 +1,7 @@
+:root { color-scheme: light dark; --ink: #16181d; --paper: #fbfaf8; }
+@media (prefers-color-scheme: dark) { :root { --ink: #e8e6e3; --paper: #16181d; } }
+* { box-sizing: border-box; }
+body { margin: 0; padding: 2rem 1rem; font: 16px/1.6 system-ui, sans-serif;
+       color: var(--ink); background: var(--paper); }
+main, header, footer { max-width: 42rem; margin: 0 auto; }
+a { color: inherit; }
