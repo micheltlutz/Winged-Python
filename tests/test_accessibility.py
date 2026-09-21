@@ -4,7 +4,9 @@ from __future__ import annotations
 
 from winged import (
     H1,
+    H2,
     H3,
+    H5,
     A,
     Body,
     Button,
@@ -18,6 +20,8 @@ from winged import (
     Input,
     Label,
     P,
+    Section,
+    Span,
     render,
 )
 from winged.accessibility import audit
@@ -52,9 +56,24 @@ def test_link_text() -> None:
     assert "link-text" not in rules(A(Img("x", "Home"), href="/"))
 
 
+def test_link_text_looks_past_a_wrapper() -> None:
+    # An icon link is almost always <a><span><img></span></a>, not a direct child.
+    assert "link-text" in rules(A(Span(Img("x", "")), href="/"))
+    assert "link-text" not in rules(A(Span(Img("x", "Home")), href="/"))
+
+
 def test_heading_order() -> None:
     assert "heading-order" in rules(Div(H1("a"), H3("b")))
     assert "heading-order" not in rules(Div(H1("a"), P("b")))
+
+
+def test_heading_order_is_scoped_to_a_section() -> None:
+    # A <section> opens its own heading context, so its first heading sets the baseline.
+    assert "heading-order" not in rules(Div(H1("a"), Section(H3("b"))))
+    # Within one section the rule still applies.
+    assert "heading-order" in rules(Section(H2("a"), H5("b")))
+    # And leaving the section restores the level it interrupted.
+    assert "heading-order" in rules(Div(H1("a"), Section(H2("b")), H5("c")))
 
 
 def test_html_lang() -> None:
@@ -66,6 +85,12 @@ def test_form_label() -> None:
     assert "form-label" in rules(Form(Input(type_="text", id_="a")))
     assert "form-label" not in rules(Form(Label("A", for_="a"), Input(type_="text", id_="a")))
     assert "form-label" not in rules(Form(Input(type_="hidden")))
+
+
+def test_form_label_may_follow_its_input() -> None:
+    # The label-after-input order is what a CSS sibling selector needs; it is still a
+    # label, and a single pass over the tree used to miss it.
+    assert "form-label" not in rules(Form(Input(type_="text", id_="a"), Label("A", for_="a")))
 
 
 def test_duplicate_id() -> None:

@@ -24,6 +24,10 @@ from .document import Document
 
 __all__ = ["A11yIssue", "audit"]
 
+# HTML's sectioning content. Each one opens a new heading context, so `heading-order`
+# compares within a section rather than against the last heading seen anywhere.
+_SECTIONING = frozenset({"article", "aside", "nav", "section"})
+
 
 @dataclass(frozen=True, slots=True)
 class A11yIssue:
@@ -41,6 +45,46 @@ def _attr(element: Element, key: str) -> str | None:
     return None
 
 
+def _descendant_images(element: Element) -> list[Element]:
+    """Every ``<img>`` under ``element``, at any depth.
+
+    Direct children are not enough: ``<a><span><img></span></a>`` is ordinary markup, and
+    a rule that only looked one level down reported it as a link with no accessible name.
+    """
+    found: list[Element] = []
+    for child in element._children:
+        if isinstance(child, Element):
+            if child.name == "img":
+                found.append(child)
+            found.extend(_descendant_images(child))
+    return found
+
+
+def _collect_label_targets(node: object, into: set[str]) -> None:
+    """Record every ``<label for=...>`` target before the walk that checks inputs.
+
+    A single pass would only see the labels that precede their input in document order,
+    so ``<input id="a"><label for="a">`` -- valid, and common in CSS layouts that style
+    the label off a sibling selector -- was reported as unlabelled.
+    """
+    if isinstance(node, Document):
+        _collect_label_targets(node.head, into)
+        _collect_label_targets(node.body, into)
+        return
+    if isinstance(node, Fragment):
+        for child in node.children:
+            _collect_label_targets(child, into)
+        return
+    if not isinstance(node, Element):
+        return
+    if node.name == "label":
+        target = _attr(node, "for")
+        if target:
+            into.add(target)
+    for child in node._children:
+        _collect_label_targets(child, into)
+
+
 def _has_text(element: Element) -> bool:
     for child in element._children:
         if isinstance(child, Text) and child.content.strip():
@@ -55,6 +99,7 @@ def audit(node: object) -> list[A11yIssue]:
     issues: list[A11yIssue] = []
     seen_ids: dict[str, int] = {}
     labelled: set[str] = set()
+    _collect_label_targets(node, labelled)
     heading_level = 0
 
     def visit(current: object, path: str) -> None:
@@ -83,11 +128,6 @@ def audit(node: object) -> list[A11yIssue]:
         if element_id is not None:
             seen_ids[element_id] = seen_ids.get(element_id, 0) + 1
 
-        if name == "label":
-            target = _attr(current, "for")
-            if target:
-                labelled.add(target)
-
         if name == "img" and _attr(current, "alt") is None:
             issues.append(A11yIssue("img-alt", "<img> has no alt attribute", here))
 
@@ -100,7 +140,7 @@ def audit(node: object) -> list[A11yIssue]:
             issues.append(A11yIssue("button-label", "<button> has no text and no aria-label", here))
 
         if name == "a" and not _has_text(current):
-            images = [c for c in current._children if isinstance(c, Element) and c.name == "img"]
+            images = _descendant_images(current)
             if images and all(not (_attr(i, "alt") or "").strip() for i in images):
                 issues.append(
                     A11yIssue("link-text", "<a> has no text and its image alt is empty", here)
@@ -123,8 +163,17 @@ def audit(node: object) -> list[A11yIssue]:
             if not _attr(current, "aria-label") and (input_id is None or input_id not in labelled):
                 issues.append(A11yIssue("form-label", "<input> has no associated label", here))
 
+        # A section opens its own heading context: its first heading sets the baseline
+        # instead of being compared with whatever came before it outside.
+        outer_level = heading_level
+        if name in _SECTIONING:
+            heading_level = 0
+
         for index, child in enumerate(current._children):
             visit(child, f"{here}[{index}]" if index else here)
+
+        if name in _SECTIONING:
+            heading_level = outer_level
 
     visit(node, "")
 
