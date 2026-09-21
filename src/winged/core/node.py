@@ -10,7 +10,7 @@ from collections.abc import Iterable
 from typing import TypeAlias
 
 from .escape import escape_text
-from .render import Node, RenderOptions
+from .render import Buffer, Node, RenderOptions
 
 __all__ = ["Child", "Comment", "Fragment", "RawHtml", "Text", "coerce", "flatten"]
 
@@ -31,7 +31,7 @@ class Text:
     def __init__(self, content: str) -> None:
         self.content = content
 
-    def write_into(self, buf: list[str], options: RenderOptions, depth: int) -> None:
+    def write_into(self, buf: Buffer, options: RenderOptions, depth: int) -> None:
         buf.append(escape_text(self.content))
 
 
@@ -48,7 +48,7 @@ class RawHtml:
     def __init__(self, html: str) -> None:
         self.html = html
 
-    def write_into(self, buf: list[str], options: RenderOptions, depth: int) -> None:
+    def write_into(self, buf: Buffer, options: RenderOptions, depth: int) -> None:
         buf.append(self.html)
 
 
@@ -64,7 +64,7 @@ class Fragment:
     def __init__(self, *children: Child) -> None:
         self.children: list[Node] = [coerce(c) for c in flatten(children)]
 
-    def write_into(self, buf: list[str], options: RenderOptions, depth: int) -> None:
+    def write_into(self, buf: Buffer, options: RenderOptions, depth: int) -> None:
         for index, child in enumerate(self.children):
             if options.pretty and index:
                 buf.append("\n")
@@ -83,7 +83,7 @@ class Comment:
             raise ValueError("an HTML comment cannot contain '--'")
         self.text = text
 
-    def write_into(self, buf: list[str], options: RenderOptions, depth: int) -> None:
+    def write_into(self, buf: Buffer, options: RenderOptions, depth: int) -> None:
         buf.append(f"<!-- {self.text} -->")
 
 

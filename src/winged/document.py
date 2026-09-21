@@ -11,7 +11,7 @@ remember to place, and ``lang`` was nobody's job at all.
 from __future__ import annotations
 
 from .core.escape import escape_attribute
-from .core.render import Node, RenderOptions
+from .core.render import Buffer, Node, RenderOptions
 
 __all__ = ["Document"]
 
@@ -26,7 +26,7 @@ class Document:
         self.body = body
         self.lang = lang
 
-    def write_into(self, buf: list[str], options: RenderOptions, depth: int) -> None:
+    def write_into(self, buf: Buffer, options: RenderOptions, depth: int) -> None:
         # The newline after the doctype is present in compact output too: WingedSwift's
         # own compact fixture starts "<!DOCTYPE html>\n<html ...".
         buf.append("<!DOCTYPE html>\n")

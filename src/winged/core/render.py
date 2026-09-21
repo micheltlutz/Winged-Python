@@ -15,7 +15,42 @@ from typing import TYPE_CHECKING, Protocol, runtime_checkable
 if TYPE_CHECKING:
     from typing import Self
 
-__all__ = ["Node", "RenderOptions", "render"]
+__all__ = ["Buffer", "Node", "RenderOptions", "Sink", "render", "render_into"]
+
+
+@runtime_checkable
+class Buffer(Protocol):
+    """Where a node writes its output.
+
+    ``list[str]`` is the one :func:`render` uses, and the one to reach for. The protocol
+    exists so :func:`render_into` can pass an adapter that forwards straight to a file
+    instead, without every ``write_into`` having to know which it got.
+    """
+
+    def append(self, chunk: str, /) -> None: ...
+
+
+@runtime_checkable
+class Sink(Protocol):
+    """The part of a text file object :func:`render_into` needs."""
+
+    def write(self, chunk: str, /) -> int | None: ...
+
+
+class _SinkBuffer:
+    """A :class:`Buffer` that forwards each chunk to a file rather than keeping it.
+
+    This is the whole of streaming: every node already appends small pieces, so sending
+    them onwards one at a time keeps memory flat no matter how large the page is.
+    """
+
+    __slots__ = ("_sink",)
+
+    def __init__(self, sink: Sink) -> None:
+        self._sink = sink
+
+    def append(self, chunk: str, /) -> None:
+        self._sink.write(chunk)
 
 
 @dataclass(frozen=True, slots=True)
@@ -52,7 +87,7 @@ class Node(Protocol):
     appending into the buffer and joining once.
     """
 
-    def write_into(self, buf: list[str], options: RenderOptions, depth: int) -> None: ...
+    def write_into(self, buf: Buffer, options: RenderOptions, depth: int) -> None: ...
 
 
 def render(node: Node, options: RenderOptions | None = None) -> str:
@@ -60,3 +95,16 @@ def render(node: Node, options: RenderOptions | None = None) -> str:
     buf: list[str] = []
     node.write_into(buf, options or RenderOptions(), 0)
     return "".join(buf)
+
+
+def render_into(node: Node, sink: Sink, options: RenderOptions | None = None) -> None:
+    """Render ``node`` straight into a text file object, holding no full copy in memory.
+
+    ``render(page)`` builds the whole string first, which for a large generated page --
+    a sitemap index, a catalogue -- means holding the markup twice: once in the pieces,
+    once joined. Writing as it goes is the same output, in constant memory.
+
+        with open("index.html", "w", encoding="utf-8") as handle:
+            render_into(page, handle)
+    """
+    node.write_into(_SinkBuffer(sink), options or RenderOptions(), 0)

@@ -2,9 +2,26 @@
 
 from __future__ import annotations
 
+import io
+from pathlib import Path
+
 import pytest
 
-from winged import Br, Code, Col, Div, Element, Img, Input, P, Pre, RenderOptions, Strong, render
+from winged import (
+    Br,
+    Code,
+    Col,
+    Div,
+    Element,
+    Img,
+    Input,
+    P,
+    Pre,
+    RenderOptions,
+    Strong,
+    render,
+    render_into,
+)
 
 PRETTY = RenderOptions.pretty_()
 
@@ -68,3 +85,33 @@ def test_whitespace_sensitive_subtrees_stay_compact() -> None:
 
 def test_mixed_content() -> None:
     assert render(P("Hello ", Strong("world"))) == "<p>Hello <strong>world</strong></p>"
+
+
+def test_render_into_writes_the_same_markup(tmp_path: Path) -> None:
+    page = Div(P("a"), P("<b>"))
+    target = tmp_path / "page.html"
+    with target.open("w", encoding="utf-8", newline="\n") as handle:
+        render_into(page, handle)
+    assert target.read_text(encoding="utf-8") == render(page)
+
+
+def test_render_into_honours_options() -> None:
+    page = Div(P("a"))
+    buffer = io.StringIO()
+    render_into(page, buffer, PRETTY)
+    assert buffer.getvalue() == render(page, PRETTY)
+
+
+def test_render_into_never_holds_the_whole_page() -> None:
+    """The point of streaming: chunks arrive as they are produced, not in one write."""
+    chunks: list[str] = []
+
+    class Recorder:
+        def write(self, chunk: str, /) -> int:
+            chunks.append(chunk)
+            return len(chunk)
+
+    render_into(Div(P("a"), P("b")), Recorder())
+    assert "".join(chunks) == "<div><p>a</p><p>b</p></div>"
+    assert len(chunks) > 1
+    assert max(len(chunk) for chunk in chunks) < 10

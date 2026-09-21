@@ -18,7 +18,7 @@ from .core.attribute import Attribute
 from .core.element import Element
 from .core.escape import escape_attribute, escape_text, escape_xml
 from .core.node import Comment, Fragment, RawHtml, Text
-from .core.render import Node, RenderOptions, render
+from .core.render import Node, RenderOptions, render, render_into
 from .core.tags import VOID_ELEMENTS, WHITESPACE_SENSITIVE
 from .document import Document
 from .elements import *  # noqa: F403
@@ -48,6 +48,7 @@ __all__ = [
     "escape_text",
     "escape_xml",
     "render",
+    "render_into",
     "render_many",
     *_ELEMENT_NAMES,
 ]

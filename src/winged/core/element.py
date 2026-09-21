@@ -18,7 +18,7 @@ from typing import TYPE_CHECKING
 from .attribute import Attribute
 from .escape import escape_attribute
 from .node import Child, Fragment, coerce, flatten
-from .render import Node, RenderOptions
+from .render import Buffer, Node, RenderOptions
 from .tags import VOID_ELEMENTS, WHITESPACE_SENSITIVE
 
 if TYPE_CHECKING:
@@ -166,7 +166,7 @@ class Element:
 
     # -- rendering --------------------------------------------------------------------
 
-    def write_into(self, buf: list[str], options: RenderOptions, depth: int) -> None:
+    def write_into(self, buf: Buffer, options: RenderOptions, depth: int) -> None:
         buf.append(f"<{self._name}")
         for attribute in self._attributes:
             buf.append(attribute.render())
