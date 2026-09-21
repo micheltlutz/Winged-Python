@@ -20,7 +20,9 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, macos-latest]
-        python: ["3.10", "3.11", "3.12", "3.13"]
+        # Every version pyproject.toml carries a classifier for. A claim nothing runs
+        # is a claim, not support.
+        python: ["3.10", "3.11", "3.12", "3.13", "3.14"]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5

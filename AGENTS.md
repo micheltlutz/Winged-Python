@@ -60,7 +60,7 @@ src/winged/
   accessibility.py the audit
   cli.py           winged new / build / serve
   templates/       what `winged new` scaffolds
-scripts/           the two generators and verify.sh
+scripts/           the two generators, the Markdown link check, and verify.sh
 tests/fixtures/    Winged-Swift's golden files, copied
 docs/              tag-catalog.md is generated; recipes and pitfalls are not
 ```
@@ -150,8 +150,9 @@ instead, and gets a row in the generator's `names` list.
 ./scripts/verify.sh
 ```
 
-It builds, tests, lints, type-checks, verifies both generated files are current, checks
-byte-for-byte parity against Winged-Swift's fixtures, installs the package into a
-throwaway venv and renders a page with it, then runs `winged new` and `winged build`
-**from `/`** — because a generator that resolves paths from the current directory passes
-every unit test and still fails for the user.
+It builds, tests, lints, type-checks, verifies both generated files are current and that
+`.claude/skills/winged/references/` is still symlinked into `docs/`, resolves every
+relative link in the Markdown, checks byte-for-byte parity against Winged-Swift's fixtures, installs the
+package into a throwaway venv and renders a page with it, then runs `winged new` and
+`winged build` **from `/`** — because a generator that resolves paths from the current
+directory passes every unit test and still fails for the user.

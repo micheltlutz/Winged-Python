@@ -57,6 +57,31 @@ step "4/7  Generated files are current"
 run "elements.py"     "$PY" scripts/generate_elements.py --check
 run "tag-catalog.md"  "$PY" scripts/generate_tag_catalog.py --check
 
+# .claude/skills/winged/references/ holds symlinks into docs/, not copies, so the skill
+# and the documentation can never disagree. Guard that: replacing one with a real file --
+# a `cp` instead of a `ln -s`, an editor that rewrites rather than follows -- is silent,
+# and the copy then rots.
+for doc in tag-catalog recipes pitfalls; do
+  REF=".claude/skills/winged/references/$doc.md"
+  if [ -L "$REF" ] && [ "$(readlink "$REF")" = "../../../../docs/$doc.md" ]; then
+    ok "skill reference $doc.md still points at docs/"
+  else
+    fail "$REF is no longer a symlink to docs/$doc.md"
+  fi
+done
+
+# A relative Markdown link that points at nothing. Cheap, and it is the mistake a
+# documentation change makes most often. It reads through the symlinks above on purpose:
+# a link is resolved from where the reader opened the file, and a skill is loaded without
+# the repository around it -- which is why docs/pitfalls.md links to MIGRATION.md by URL.
+BROKEN=$("$PY" scripts/check_links.py)
+if [ -z "$BROKEN" ]; then
+  ok "every relative link in the Markdown resolves"
+else
+  fail "broken relative links"
+  printf '%s\n' "$BROKEN" | sed 's/^/        /'
+fi
+
 step "5/7  Golden fixtures"
 # Deliberately without WINGED_UPDATE_FIXTURES: a stale fixture must be a failure here,
 # never a silent rewrite.
